@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^3.3.38",
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
@@ -22,7 +21,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@woodwing/assets-client-sdk": "file:woodwing-assets-client-sdk-0.0.1.tgz",
-    "jquery": "^3.5.1"
+    "@woodwing/assets-client-sdk": "file:woodwing-assets-client-sdk-0.0.1.tgz"
   }
 }
