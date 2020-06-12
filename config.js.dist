@@ -1,3 +1,3 @@
 module.exports = {
-    CLIENT_URL_WHITELIST: ['https://your.client.url']
+    CLIENT_URL_WHITELIST: []
 };
