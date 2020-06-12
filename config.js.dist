@@ -1,0 +1,3 @@
+module.exports = {
+    CLIENT_URL: 'https://your.client.url'
+};

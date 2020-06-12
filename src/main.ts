@@ -1,6 +1,7 @@
 import { AssetsApiClient, AssetsPluginContext, queryForSelection } from '@woodwing/assets-client-sdk';
 import './style.css';
 import { Asset } from '@woodwing/assets-client-sdk/dist/model/asset';
+import * as config from '../config.js';
 
 const fieldsToIgnore = ['filename', 'previewState', 'thumbnailState'];
 let apiClient: AssetsApiClient;
@@ -10,6 +11,7 @@ let fieldInfo: any;
 let contextService: AssetsPluginContext;
 
 const stampsListElement = document.getElementById('stamps-list');
+const bodyElement = document.querySelector('body');
 
 const getSelection = () => {
     // Get current asset selection from context
@@ -87,7 +89,7 @@ const getStampMetadata = (hit: Asset) => {
 const stamp = (element: HTMLElement) => {
     const selectedHits = getSelection();
     if (!selectedHits || selectedHits.length == 0) return;
-    
+
     const query = queryForSelection(selectedHits);
     const stampHitId = element.dataset.hitId;
     const metadata = getMetadataToUpdate(stampHits[stampHitId]);
@@ -111,23 +113,21 @@ const getMetadataToUpdate = (sourceMetadata: any) => {
 const togglePanel = () => {
     const selectedHits = getSelection();
 
-    document.querySelector('body').classList.remove('no-stamps');
-    document.querySelector('body').classList.remove('no-selection');
-    document.querySelector('body').classList.remove('stamps-panel');
+    bodyElement.classList.remove('no-stamps', 'no-selection', 'stamps-panel');
 
     if (stampHits && Object.keys(stampHits).length > 0 && selectedHits && selectedHits.length > 0) {
-        return document.querySelector('body').classList.add('stamps-panel');       
+        return bodyElement.classList.add('stamps-panel');       
     }
 
     if (!stampHits || Object.keys(stampHits).length == 0) {
-        return document.querySelector('body').classList.add('no-stamps');
+        return bodyElement.classList.add('no-stamps');
     }
 
-    document.querySelector('body').classList.add('no-selection');
+    bodyElement.classList.add('no-selection');
 };
 
 (async () => {
-    contextService = await AssetsPluginContext.get('http://localhost:9000');
+    contextService = await AssetsPluginContext.get(config.CLIENT_URL);
     apiClient = AssetsApiClient.fromPluginContext(contextService);
 
     // 1. Load messages from server
