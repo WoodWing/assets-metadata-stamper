@@ -42,8 +42,8 @@ const loadStamps = () => {
         const validHits = data.hits.filter(hit => !!getStampMetadata(hit));
         validHits.forEach(hit => stampHits[hit.id] = getStampMetadata(hit));
 
-        const stampsHtml = validHits.reduce((acc: string, hit) => {
-            return acc + `<li class="stamp-item" data-hit-id="${hit.id}">`
+        const stampsHtml = validHits.reduce((html: string, hit) => {
+            return html + `<li class="stamp-item" data-hit-id="${hit.id}">`
                 + `<div class="stamp">${hit.metadata.baseName}</div>`
                 + getMetadataHtml(stampHits[hit.id])
                 + '</li>';
@@ -57,15 +57,18 @@ const loadStamps = () => {
 };
 
 const getMetadataHtml = (stampMetadata: any) => {
-    const html = Object.keys(stampMetadata)
+    const metadataHtml = Object.keys(stampMetadata)
         .filter(fieldName => stampMetadata.hasOwnProperty(fieldName))
-        .reduce((acc: string, fieldName) => {
+        .reduce((html: string, fieldName) => {
             const fieldLabel = apiClient.messages.getString('field_label.' + fieldName);
             const formattedValue = getFormattedValue(fieldName, stampMetadata[fieldName]);
-            return acc + '<div class="stamp-metadata-field"><span class="stamp-metadata-name">' + fieldLabel + ': </span><span class="stamp-metadata-value">' + formattedValue + '</span></div>'            
+            return html + `<div class="stamp-metadata-field">
+                    <span class="stamp-metadata-name">${fieldLabel}: </span>
+                    <span class="stamp-metadata-value">${formattedValue}</span>
+                </div>`;
         }, '');
 
-    return `<div class="stamp-metadata">${html}</div>`;
+    return `<div class="stamp-metadata">${metadataHtml}</div>`;
 };
 
 const getFormattedValue = (fieldName: string, fieldValue: any) => {
@@ -80,9 +83,9 @@ const getStampMetadata = (hit: Asset) => {
         .filter(fieldName => stampFields.includes(fieldName) && hit.metadata.hasOwnProperty(fieldName));
     if (!validFields.length) return null;
 
-    return validFields.reduce((acc: { [key: string]: any }, fieldName) => {
-        acc[fieldName] = hit.metadata[fieldName];
-        return acc;
+    return validFields.reduce((stampMetadata: { [key: string]: any }, fieldName) => {
+        stampMetadata[fieldName] = hit.metadata[fieldName];
+        return stampMetadata;
     }, {});
 };
 
@@ -104,9 +107,9 @@ const formatMetadata = (fieldName: string, metadata: any): string => {
 };
 
 const getMetadataToUpdate = (sourceMetadata: any) => {
-    return Object.keys(sourceMetadata).reduce((acc: {[key: string]: string}, fieldName) => {
-        acc[fieldName] = formatMetadata(fieldName, sourceMetadata[fieldName]);
-        return acc;
+    return Object.keys(sourceMetadata).reduce((metadata: {[key: string]: string}, fieldName) => {
+        metadata[fieldName] = formatMetadata(fieldName, sourceMetadata[fieldName]);
+        return metadata;
     }, {});
 };
 
