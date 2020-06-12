@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "downlevelIteration": true,
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "removeComments": true,
+        "target": "es6",
+        "lib": ["dom"]
+    },
+}
