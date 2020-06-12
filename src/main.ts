@@ -130,7 +130,7 @@ const togglePanel = () => {
 };
 
 (async () => {
-    contextService = await AssetsPluginContext.get(config.CLIENT_URL);
+    contextService = await AssetsPluginContext.get(config.CLIENT_URL_WHITELIST);
     apiClient = AssetsApiClient.fromPluginContext(contextService);
 
     // 1. Load messages from server
