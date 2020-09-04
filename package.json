@@ -21,6 +21,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@woodwing/assets-client-sdk": "file:woodwing-assets-client-sdk-0.0.1.tgz"
+    "@woodwing/assets-client-sdk": "0.0.1"
   }
 }
