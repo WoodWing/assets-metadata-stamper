@@ -1,0 +1,3 @@
+[build]
+  command = "touch config.js && npm run build"
+  publish = "dist"
