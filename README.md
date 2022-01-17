@@ -7,3 +7,5 @@ This is a plugin for WoodWing Assets that allows the user to select files and st
 3. Build the plugin with `npm run build`.
 
 The `dist` folder will now contain the compiled plugin which can be hosted statically.
+
+Note that this distributed version may be hosted in one place and reused by multiple assets installations. There's no need to host a separate version per installation.
