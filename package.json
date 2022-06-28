@@ -5,12 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.conf.js",
-    "build": "webpack --config webpack.conf.js",
-    "preinstall": "npx npm-force-resolutions"
-  },
-  "resolutions": {
-    "glob-parent": "^6.0.2",
-    "yargs-parser": "^13.1.2"
+    "build": "webpack --config webpack.conf.js"
   },
   "author": "",
   "license": "ISC",
