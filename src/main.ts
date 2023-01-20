@@ -73,7 +73,7 @@ const getMetadataHtml = (stampMetadata: any) => {
 
 const getFormattedValue = (fieldName: string, fieldValue: any) => {
     const fi = fieldInfo.fieldInfoByName[fieldName];
-    if (fi.datatype === 'datetime') return fieldValue.formatted;
+    if (typeof fieldValue === "object" && fieldValue.formatted) return fieldValue.formatted;
     if (fi.multivalue) return fieldValue.join(', ');
     return fieldValue;
 };
@@ -101,7 +101,7 @@ const stamp = (element: HTMLElement) => {
 
 const formatMetadata = (fieldName: string, metadata: any): string => {
     const fi = fieldInfo.fieldInfoByName[fieldName];
-    if (fi.datatype === 'datetime') return metadata.value;
+    if (typeof metadata === "object" && metadata.value) return metadata.value;
     if (fi.multivalue) return '+' + metadata.join(', +');
     return metadata;
 };
