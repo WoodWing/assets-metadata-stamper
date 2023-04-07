@@ -9,3 +9,6 @@ This is a plugin for WoodWing Assets that allows the user to select files and st
 The `dist` folder will now contain the compiled plugin which can be hosted statically.
 
 Note that this distributed version may be hosted in one place and reused by multiple assets installations. There's no need to host a separate version per installation.
+
+## Prerequisites
+* The user that uses the plugin should have view permissions on the baseName metadata field in order to display the stampfile name correctly in the panel
